@@ -1,4 +1,4 @@
-# Gestión de Inventario con QR
+# InfoLab
 
 Este proyecto es una aplicación móvil diseñada para optimizar la gestión del inventario en supermercados, almacenes y otros negocios que manejan productos en depósito.
 La app permite a los empleados escanear el código QR de cualquier artículo en el almacén para obtener de manera instantánea información precisa sobre su disponibilidad,
