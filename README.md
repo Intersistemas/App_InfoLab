@@ -1,12 +1,12 @@
 # InfoLab
 
 Este proyecto es una aplicación móvil diseñada para optimizar la gestión del inventario en supermercados, almacenes y otros negocios que manejan productos en depósito.
-La app permite a los empleados escanear el código QR de cualquier artículo en el almacén para obtener de manera instantánea información precisa sobre su disponibilidad,
+La app permite a los empleados escanear el Código de Barra de cualquier artículo en el almacén para obtener de manera instantánea información precisa sobre su disponibilidad,
 cantidad en stock y otros detalles relevantes del producto.
 
 ## Características principales
 
-- **Escaneo de QR:** Los empleados pueden escanear códigos QR de productos para obtener información actualizada sobre su disponibilidad y ubicación.
+- **Escaneo de Código de Barra:** Los empleados pueden escanear código de Barra de productos para obtener información actualizada sobre su disponibilidad y ubicación.
 - **Gestión en tiempo real:** El inventario se actualiza al instante, proporcionando datos precisos y reduciendo errores.
 - **Acceso rápido a la información:** Los usuarios pueden ver detalles como el stock disponible sin la necesidad de búsquedas manuales.
 
