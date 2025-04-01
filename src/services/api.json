@@ -1,0 +1,340 @@
+[
+    {
+      "codigoBarra": "7791234567890",
+      "descripcion": "Arroz Largo Fino 1kg",
+      "precioCosto": 100.00,
+      "preciosLista": {
+        "precio1": 120.50,
+        "precio2": 125.00,
+        "precio3": 130.00
+      },
+      "cantidad": 50,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876543210",
+      "descripcion": "Yerba Mate 500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    
+    {
+      "codigoBarra": "7799876543212",
+      "descripcion": "Yerba Mate 1000g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876543000",
+      "descripcion": "Yerba Mate Cachamay 1500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876541111",
+      "descripcion": "Yerba Mate Romanse 1500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876542222",
+      "descripcion": "Yerba Mate Union 1500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876542001",
+      "descripcion": "Yerba Mate Union 1500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876542002",
+      "descripcion": "Yerba Mate Union 1500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876542003",
+      "descripcion": "Yerba Mate Union 1500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7799876542004",
+      "descripcion": "Yerba Mate Union 1500g",
+      "precioCosto": 550.00,
+      "preciosLista": {
+        "precio1": 650.00,
+        "precio2": 670.00,
+        "precio3": 690.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7795554443332",
+      "descripcion": "Azúcar Blanca 1kg",
+      "precioCosto": 90.00,
+      "preciosLista": {
+        "precio1": 110.00,
+        "precio2": 115.00,
+        "precio3": 120.00
+      },
+      "cantidad": 60,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7798882221119",
+      "descripcion": "Fideos Spaghetti 500g",
+      "precioCosto": 75.00,
+      "preciosLista": {
+        "precio1": 90.75,
+        "precio2": 95.00,
+        "precio3": 100.00
+      },
+      "cantidad": 40,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7794443332221",
+      "descripcion": "Harina de Trigo 1kg",
+      "precioCosto": 70.00,
+      "preciosLista": {
+        "precio1": 80.25,
+        "precio2": 85.00,
+        "precio3": 90.00
+      },
+      "cantidad": 70,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7793216549873",
+      "descripcion": "Aceite de Girasol 1L",
+      "precioCosto": 450.00,
+      "preciosLista": {
+        "precio1": 500.00,
+        "precio2": 520.00,
+        "precio3": 550.00
+      },
+      "cantidad": 20,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7791122334455",
+      "descripcion": "Leche Entera 1L",
+      "precioCosto": 130.00,
+      "preciosLista": {
+        "precio1": 150.00,
+        "precio2": 160.00,
+        "precio3": 170.00
+      },
+      "cantidad": 50,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7796677889900",
+      "descripcion": "Café Instantáneo 170g",
+      "precioCosto": 700.00,
+      "preciosLista": {
+        "precio1": 800.00,
+        "precio2": 850.00,
+        "precio3": 900.00
+      },
+      "cantidad": 15,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7791110002222",
+      "descripcion": "Té en Saquitos 50u",
+      "precioCosto": 250.00,
+      "preciosLista": {
+        "precio1": 300.00,
+        "precio2": 320.00,
+        "precio3": 340.00
+      },
+      "cantidad": 25,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7791011121314",
+      "descripcion": "Manteca 200g",
+      "precioCosto": 350.00,
+      "preciosLista": {
+        "precio1": 400.00,
+        "precio2": 420.00,
+        "precio3": 450.00
+      },
+      "cantidad": 40,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7792021222324",
+      "descripcion": "Queso Rallado 100g",
+      "precioCosto": 200.00,
+      "preciosLista": {
+        "precio1": 250.00,
+        "precio2": 270.00,
+        "precio3": 300.00
+      },
+      "cantidad": 30,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7795556667778",
+      "descripcion": "Salsa de Tomate 520g",
+      "precioCosto": 170.00,
+      "preciosLista": {
+        "precio1": 200.00,
+        "precio2": 210.00,
+        "precio3": 230.00
+      },
+      "cantidad": 60,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7798889990001",
+      "descripcion": "Atún en Lata 170g",
+      "precioCosto": 450.00,
+      "preciosLista": {
+        "precio1": 500.00,
+        "precio2": 550.00,
+        "precio3": 600.00
+      },
+      "cantidad": 10,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7795550001112",
+      "descripcion": "Lentejas 500g",
+      "precioCosto": 100.00,
+      "preciosLista": {
+        "precio1": 120.00,
+        "precio2": 130.00,
+        "precio3": 140.00
+      },
+      "cantidad": 40,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7793334445556",
+      "descripcion": "Sal Fina 1kg",
+      "precioCosto": 60.00,
+      "preciosLista": {
+        "precio1": 70.00,
+        "precio2": 75.00,
+        "precio3": 80.00
+      },
+      "cantidad": 80,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7791236547890",
+      "descripcion": "Vinagre Blanco 1L",
+      "precioCosto": 120.00,
+      "preciosLista": {
+        "precio1": 140.00,
+        "precio2": 150.00,
+        "precio3": 160.00
+      },
+      "cantidad": 20,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7794567890123",
+      "descripcion": "Galletas de Agua 300g",
+      "precioCosto": 220.00,
+      "preciosLista": {
+        "precio1": 250.00,
+        "precio2": 270.00,
+        "precio3": 290.00
+      },
+      "cantidad": 50,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7797890123456",
+      "descripcion": "Mermelada de Durazno 400g",
+      "precioCosto": 300.00,
+      "preciosLista": {
+        "precio1": 350.00,
+        "precio2": 370.00,
+        "precio3": 400.00
+      },
+      "cantidad": 35,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7796543210987",
+      "descripcion": "Chocolate para Taza 250g",
+      "precioCosto": 700.00,
+      "preciosLista": {
+        "precio1": 750.00,
+        "precio2": 800.00,
+        "precio3": 850.00
+      },
+      "cantidad": 25,
+      "ultimaActualizacion": "2025-01-14"
+    },
+    {
+      "codigoBarra": "7791112223334",
+      "descripcion": "Gaseosa Cola 2L",
+      "precioCosto": 250.00,
+      "preciosLista": {
+        "precio1": 300.00,
+        "precio2": 320.00,
+        "precio3": 350.00
+      },
+      "cantidad": 100,
+      "ultimaActualizacion": "2025-01-14"
+    }
+  ]
+  
