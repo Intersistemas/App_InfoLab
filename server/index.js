@@ -6,7 +6,7 @@ const app = express();
 const { sql, config } = require('./dbConfig');
 
 // Defino el puerto donde se va a ejecutar el backend
-const PORT = 3000;
+const PORT = 3001;
 
 // Middleware para poder trabajar con datos en formato JSON
 app.use(express.json());
@@ -15,6 +15,24 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors()); // Habilito CORS para que mi frontend pueda comunicarse con este backend
 
+//Esta ruta me trae todos los artículos de la tabla fact0007
+app.get('/articulos', async (req, res) => {
+    try {
+        // Me conecto a la base de datos SQL Server
+        const pool = await sql.connect(config);
+
+        // Realizo la consulta para obtener todos los artículos de la tabla fact0007
+        const resultado = await pool.request().query('SELECT * FROM FACT0007');
+
+        // Devuelvo los resultados al cliente en formato JSON
+        res.status(200).json(resultado.recordset);
+
+    } catch (error) {
+        // Si algo falla durante la consulta, muestro el error y devuelvo un mensaje al cliente
+        console.error('Error al obtener los artículos:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 // Ruta GET que recibe el código desde el frontend
 app.get('/buscar/:codigo', async (req, res) => {
     // Guardo el código que viene como parámetro en la URL
@@ -62,7 +80,37 @@ app.get('/buscar/:codigo', async (req, res) => {
     }
 });
 
+//Ruta Get para buscar un articulo por su nombre
+app.get('/buscarNombre/:nombre', async (req, res) => {
+    // Guardo el nombre que viene como parámetro en la URL
+    const nombreIngresado = req.params.nombre;
+
+    try {
+        // Me conecto a la base de datos SQL Server
+        const pool = await sql.connect(config);
+
+        // Busco el nombre ingresado en la tabla fact0007 usando el campo "articulo"
+        let resultado = await pool.request()
+            .input('nombre', sql.VarChar, `%${nombreIngresado}%`)
+            .query('SELECT * FROM fact0007 WHERE descripcion LIKE @nombre');
+
+        // Devuelvo al cliente los datos encontrados
+        res.status(200).json(resultado.recordset);
+
+    } catch (error) {
+        // Si algo falla durante la consulta, muestro el error y devuelvo un mensaje al cliente
+        console.error('Error al buscar el nombre:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
 // Arranco el servidor y lo pongo a escuchar en el puerto definido
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+// app.listen(PORT, () => {
+//     console.log(`Servidor escuchando en http://localhost:${PORT}`);
+// });
+
+
+//realizo esto para que el servidor escuche en todas las interfaces de red disponibles
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor escuchando en http://0.0.0.0:${PORT}`);
 });
