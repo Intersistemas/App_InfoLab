@@ -63,9 +63,15 @@ resultItem: {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  borderWidth: 1,
+  // borderWidth: 1,
   borderRadius: 5,
   margin: 10,
+  backgroundColor: "white", // Color de fondo gris claro
+  //sombra de la tarjeta
+
+boxShadow:  "3px 3px 8px #003366"   /* Sombra sin desenfoque */
+ 
+  
 
   
 
@@ -104,6 +110,8 @@ modalContainer: {
   alignSelf: "center",
   top: "20%",
   borderRadius: 10,
+
+  boxShadow:  "0px 5px 10px 10px "   //sombra
   
 
   
@@ -121,6 +129,17 @@ t: {
   alignContent: "center",
   alignSelf: "center",
 
+},
+tDescription: {
+  color: "white", //color amarillo 
+  fontSize: 16,
+  textAlign: "center",
+  alignItems: "center",
+  justifyContent: "center",
+  alignContent: "center",
+  alignSelf: "center",
+
+  marginBottom: 20,
 },
 tt: {
 
@@ -149,21 +168,23 @@ t2: {
 modalTitle: {
   fontSize: 18,
   fontWeight: 'bold',
-  color: "white", // Azul oscuro
+  color: "yellow", // Azul oscuro
   marginTop: 10,
-  marginBottom: 20,
+  marginBottom: 5,
   textAlign: "center",
-  fontSize: 20,
+  textDecorationLine : "underline",
+
 },
 closeButton: {
+
   // Estilo del botón de cerrar
   //boton flotante en la parte derecha superior
   position: 'absolute',
   top: 10,
   right: 10,
   backgroundColor: 'red', // Color de fondo del botón
-  borderRadius: "50%",
-  padding: 10,
+  borderRadius: "20%",
+  padding: 5,
   elevation: 5, // Sombra en Android
 
 },

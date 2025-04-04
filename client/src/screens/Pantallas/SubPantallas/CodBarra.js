@@ -150,13 +150,13 @@ export function CodBarra() {
             textAlign='center' // Centra el texto dentro del TextInput
 
           />
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={fetchData}>
             <Icon name="magnify" size={25} color="black" />
           </TouchableOpacity>
         </View>
   
         <View style={styles.containerBtn}>
-          <TouchableOpacity style={styles.button} onPress={fetchData}>
+          <TouchableOpacity style={styles.button} >
             <Text style={styles.buttonText}>ESCANEAR</Text>
           </TouchableOpacity>
         </View>
@@ -169,9 +169,6 @@ export function CodBarra() {
               <Text style={styles.resultText}>
                 {item.DESCRIPCION}
               </Text>
-              {/* <Text style={styles.resultText1}>
-                ${item.PRECIO_LISTA1}
-              </Text> */}
               <Text>
               <Icon name="arrow-right" size={20} color="grey" />
               </Text>
@@ -189,30 +186,53 @@ export function CodBarra() {
             </TouchableOpacity>
           <View>
             
-          <Text style={styles.modalTitle}>Detalles del Artículo</Text>
+          
             {selectedItem ? (
               <>
+              <Text  style={styles.modalTitle} >{selectedItem.DESCRIPCION}</Text>
+              <Text  style={styles.tDescription} >Codigo: {selectedItem.ARTICULO}</Text>
                 <View>
-                <Text  style={styles.t} >{selectedItem.DESCRIPCION}</Text>
+                
                 <Text style={styles.tt} > Precio Lista 1: <Text  style={styles.t}>${selectedItem.PRECIO_LISTA1}</Text></Text>
                 <Text style={styles.tt} > Precio Lista 2: <Text  style={styles.t}>${selectedItem.PRECIO_LISTA2}</Text></Text>
                 <Text style={styles.tt} > Precio Lista 3: <Text  style={styles.t}>${selectedItem.PRECIO_LISTA3}</Text></Text>
-                <Text style={styles.t} >Ultima Actualizacion: {selectedItem.FECHAACTPRECIOS}</Text>
+                {/* <Text style={styles.t} >Ultima Actualizacion: {selectedItem.FECHAACTPRECIOS}</Text> */}
+            
+                <Text style={styles.t}>
+                  Ultima Actualizacion: {selectedItem.FECHAACTPRECIOS ? 
+                    new Date(selectedItem.FECHAACTPRECIOS).toLocaleString('es-ES', {
+                      dateStyle: 'short'
+                    }) : 
+                    "N/A"}
+                </Text>
+
+
                 </View>
-                <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center",paddingTop: 10 }}>
+                  <View style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
                   <Text  style={styles.t2} >
-                    Almacen Salon de Ventas: -
+                    Almacen Salon de Ventas: 
                   </Text>
                   <Text  style={styles.t2} >
-                    Stock: {selectedItem.STOCK_ACTUAL || "N/A"}
+                    -
                   </Text>
-                  <Text  style={styles.t2} >
-                    Unidad: {selectedItem.UNIDAD || "N/A"}
-                  </Text>
+                  </View>
+                  <View style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                  <Text  style={styles.t2} >Stock:  </Text>
+                  <Text  style={styles.t2} >{selectedItem.STOCK_ACTUAL || "N/A"}</Text>
+                  </View>
+                  <View style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                  <Text  style={styles.t2}> Unidad: </Text>
+                  <Text style={styles.t2}> {selectedItem.UNID || "N/A"}</Text>
+                  </View>
                 </View>
               </> 
             ) : (
-              <Text style={styles.t} >No hay información disponible</Text>
+              // <Text style={styles.t} >No hay información disponible</Text>
+                    <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 20 }}>
+                      <Icon name="reload" size={30} color="grey" />
+                      <Text style={{ fontSize: 16, color: "grey", marginLeft: 10 }}>No hay resultados para mostrar</Text>
+                    </View>
             )}
           </View>
 
