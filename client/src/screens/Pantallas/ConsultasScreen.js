@@ -33,7 +33,7 @@ export const ConsultasScreen = ({navigation}) => {
             <View style={styles.containerBtn}>
                 <TouchableOpacity  style={styles.button}  onPress={handlePressDescrip}><Text style={styles.buttonText}>DESCRIPCION</Text></TouchableOpacity>
             </View>
-            <Text style={{marginTop: 10, fontSize: 16}}>Buscar Articulos por Nombre y/o Descripcion</Text>
+            <Text style={{marginTop: 10, fontSize: 16}}>Buscar Articulos por Nombre y/o Descripcion </Text>
            
         </View>
     );
