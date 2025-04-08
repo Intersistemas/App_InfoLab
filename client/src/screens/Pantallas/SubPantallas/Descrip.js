@@ -221,7 +221,7 @@ export function Descrip() {
 
     setLoading(true); // Mostrar indicador de carga
     try {
-      const response = await fetch(`http://192.168.0.46:3001/buscarNombre/${busquedaXnombre}`);
+      const response = await fetch(`http://192.168.10.118:3001/buscarNombre/${busquedaXnombre}`);
       if (!response.ok) {
         throw new Error(`Error en la respuesta del servidor: ${response.status}`);
       }

@@ -100,8 +100,8 @@ resultText1: {
 
 //---------------------------------------------------
 modalContainer: {
-  width: "80%",
-  height: "50%",
+  width: "90%",
+  height: "60%",
   backgroundColor: "rgba(0, 0, 0, 0.93)", // Fondo semitransparente
   justifyContent: "center",
   alignItems: "center",
@@ -111,7 +111,7 @@ modalContainer: {
   top: "20%",
   borderRadius: 10,
 
-  boxShadow:  "0px 5px 10px 10px "   //sombra
+  // boxShadow:  "0px 5px 10px 10px "   //sombra
   
 
   
