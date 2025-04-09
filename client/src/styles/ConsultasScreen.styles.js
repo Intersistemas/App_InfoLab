@@ -33,7 +33,12 @@ containerBtn:{
   justifyContent: "center",
   borderRadius: 10,
   backgroundColor: "#003366", // Azul oscuro
-  borderRadius: 50
+  borderRadius: 10,
+  borderColor: "#f79b52", // Azul oscuro
+  //tamaño del borde
+  borderWidth: 2,
+
+  
 },
 buttonText: {
   color: 'white', // Color del texto

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View,Text, TextInput, Button, Alert} from 'react-native';
+import { View,Text, TextInput, Button, Alert, Image} from 'react-native';
 import styles from '../../styles/Login.styles'; // Importa los estilos
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -24,8 +24,8 @@ export const Login = ({ navigation }) => {
               
             <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Icon name="qrcode-scan" size={50} color="#003366" />
-                <Text style={styles.logoText}>InfoLab Soluciones</Text>
+                <Image source={require('../../../assets/logoP.png')} style={{width: 100, height: 100}} />
+                {/* <Text style={styles.logoText}>InfoLab Soluciones</Text> */}
             </View>
             <View style={styles.containerInp}>
             

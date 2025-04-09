@@ -168,7 +168,7 @@ t2: {
   justifyContent: "center",
   alignContent: "center",
   alignSelf: "center",
-  fontSize: 12,
+  fontSize: 16,
 
 },
 modalTitle: {

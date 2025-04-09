@@ -33,7 +33,6 @@ containerBtn:{
   margin: 10,
   borderWidth: 1,
   justifyContent: "center",
-  borderRadius: 5,
   backgroundColor: "#003366", // Azul oscuro
   borderRadius: 10,
 },

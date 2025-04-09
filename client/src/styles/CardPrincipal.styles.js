@@ -31,11 +31,16 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: '100%',
         height: 140,
+
+        borderBottomColor: "#f79b52", // Azul oscuro
+        borderTopColor: "#f79b52", // Azul oscuro
+        //tamaño del borde
+        borderWidth: 2,
         
     },
     cardText: {
         color: colors.white, // Blanco
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         marginLeft: 10,
     },

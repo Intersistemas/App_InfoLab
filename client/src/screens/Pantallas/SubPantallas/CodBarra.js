@@ -190,7 +190,7 @@
 // Importación de React y hooks
 import React, { useState, useEffect } from 'react';
 // Componentes nativos de React Native
-import { View, Text, TextInput, TouchableOpacity, FlatList, Modal, Alert, Animated, Easing } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, Modal, Alert, Animated, Easing, Image} from 'react-native';
 // Iconos de MaterialCommunityIcons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // Importación de estilos personalizados
@@ -245,7 +245,7 @@ export function CodBarra() {
   const fetchData = async (codigoManual) => {
     const codigoEjemplo = codigoManual || inputValue;
     try {
-      const response = await fetch(`http://192.168.10.118:3001/buscar/${codigoEjemplo}`);
+      const response = await fetch(`http://192.168.0.46:3001/buscar/${codigoEjemplo}`);
       const data = await response.json();
       setResults(data);
       if (data.length > 0) {
@@ -277,8 +277,8 @@ export function CodBarra() {
       <View style={styles.container}>
         {/* Encabezado con icono y título */}
         <View style={styles.logoContainer}>
-          <Icon name="qrcode-scan" size={50} color="#003366" />
-          <Text style={styles.logoText}>InfoLab</Text>
+          <Image source={require('../../../../assets/logoP.png')} style={{width: 100, height: 100}} />
+          {/* <Text style={styles.logoText}>InfoLab</Text> */}
         </View>
 
         {/* Título de la pantalla */}
@@ -347,10 +347,10 @@ export function CodBarra() {
                     new Date(selectedItem.FECHAACTPRECIOS).toLocaleString('es-ES', { dateStyle: 'short' }) :
                     "N/A"}
                 </Text>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingTop: 10 }}>
-                  <View><Text style={styles.t2}>Almacén:</Text><Text style={styles.t2}>-</Text></View>
-                  <View><Text style={styles.t2}>Stock:</Text><Text style={styles.t2}>{selectedItem.STOCK_ACTUAL || "N/A"}</Text></View>
-                  <View><Text style={styles.t2}>Unidad:</Text><Text style={styles.t2}>{selectedItem.UNID || "N/A"}</Text></View>
+                <View style={{ flexDirection: "column", justifyContent: "center", paddingTop: 10 }}>
+                  <View><Text style={styles.t2}>Almacén:</Text><Text style={styles.t2}>{"N/A"}</Text></View>
+                  <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}><Text style={styles.t2}>Stock:</Text><Text style={styles.t2}>{selectedItem.STOCK_ACTUAL || "N/A"}</Text></View>
+                  <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}><Text style={styles.t2}>Unidad:</Text><Text style={styles.t2}>{selectedItem.UNID || "N/A"}</Text></View>
                 </View>
               </>
             ) : (

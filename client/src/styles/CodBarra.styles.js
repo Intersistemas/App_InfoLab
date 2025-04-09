@@ -37,8 +37,11 @@ containerBtn:{
     justifyContent: "center",
     borderRadius: 10,
     backgroundColor: "#003366", // Azul oscuro
-    borderRadius: 50,
-    marginTop: 20
+    borderRadius: 10,
+    marginTop: 20,
+    borderColor: "#f79b52", // Azul oscuro
+    //tamaño del borde
+    borderWidth: 2,
   },
 
   buttonText: {
@@ -156,15 +159,17 @@ tt: {
 t2: {
   color: "white", // Azul oscuro
   fontWeight: 'bold',
-  marginBottom: 10,
+  marginBottom: 5,
   textAlign: "center",
   alignItems: "center",
   justifyContent: "center",
   alignContent: "center",
   alignSelf: "center",
-  fontSize: 12,
+  fontSize: 16,
 
 },
+
+
 modalTitle: {
   fontSize: 18,
   fontWeight: 'bold',

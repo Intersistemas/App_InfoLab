@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import {View, Text, TouchableOpacity, TextInput } from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../../styles/RecepcionScreen.styles'; // Importa los estilos
 
@@ -31,8 +31,8 @@ const horaFormateada = `${hora}:${minutos}`;
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Icon name="qrcode-scan" size={50} color="#003366" />
-                <Text style={styles.logoText}>InfoLab</Text>
+                 <Image source={require('../../../assets/logoP.png')} style={{width: 100, height: 100}} />
+                {/* <Text style={styles.logoText}>InfoLab</Text> */}
             </View>
             <Text style={{marginBottom: 40, fontSize: 28}}>Recepcion de Mercaderias</Text>
            <Text>{fecha} {horaFormateada}</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Alert } from 'react-native';
+import {View, Text, TouchableOpacity, Alert , Image} from 'react-native';
 import styles from '../../styles/ConsultasScreen.styles'; // Importa los estilos
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -19,8 +19,9 @@ export const ConsultasScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Icon name="qrcode-scan" size={50} color="#003366" />
-                <Text style={styles.logoText}>InfoLab</Text>
+                {/* <Icon name="qrcode-scan" size={50} color="#003366" /> */}
+                <Image source={require('../../../assets/logoP.png')} style={{width: 100, height: 100}} />
+                {/* <Text style={styles.logoText}>InfoLab</Text> */}
             </View>
             <Text style={{marginBottom: 40, fontSize: 25}}>Consulta de Articulos</Text>
             <View style={styles.containerBtn} >

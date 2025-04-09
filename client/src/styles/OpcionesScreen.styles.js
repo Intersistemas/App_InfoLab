@@ -51,7 +51,7 @@ logoText: {
     justifyContent: "center",
     borderRadius: 10,
     backgroundColor: "#003366", // Azul oscuro
-    borderRadius: 50,
+    borderRadius: 10,
     
   },
   buttonText: {

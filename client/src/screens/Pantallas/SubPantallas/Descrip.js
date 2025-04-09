@@ -193,7 +193,7 @@
 
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, Modal, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, Modal, ActivityIndicator,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../../../styles/Descrip.styles';
 import Toast from 'react-native-toast-message';
@@ -221,7 +221,7 @@ export function Descrip() {
 
     setLoading(true); // Mostrar indicador de carga
     try {
-      const response = await fetch(`http://192.168.10.118:3001/buscarNombre/${busquedaXnombre}`);
+      const response = await fetch(`http://192.168.0.46:3001/buscarNombre/${busquedaXnombre}`);
       if (!response.ok) {
         throw new Error(`Error en la respuesta del servidor: ${response.status}`);
       }
@@ -265,8 +265,8 @@ export function Descrip() {
     <View>
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <Icon name="qrcode-scan" size={50} color="#003366" />
-          <Text style={styles.logoText}>InfoLab</Text>
+          <Image source={require('../../../../assets/logoP.png')} style={{width: 100, height: 100}} />
+          {/* <Text style={styles.logoText}>InfoLab</Text> */}
         </View>
 
         <Text style={{ fontSize: 16, marginTop: 20 }}>Buscar Artículo por Nombre</Text>
@@ -346,7 +346,7 @@ export function Descrip() {
                       : 'N/A'}
                   </Text>
                 </View>
-                <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center",paddingTop: 10 }}>
+                <View style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center",paddingTop: 10 }}>
                   <View style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
                   <Text  style={styles.t2} >
                     Almacen Salon de Ventas: 
@@ -355,11 +355,11 @@ export function Descrip() {
                     -
                   </Text>
                   </View>
-                  <View style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                  <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
                   <Text  style={styles.t2} >Stock:  </Text>
                   <Text  style={styles.t2} >{selectedItem.STOCK_ACTUAL || "N/A"}</Text>
                   </View>
-                  <View style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                  <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
                   <Text  style={styles.t2}> Unidad: </Text>
                   <Text style={styles.t2}> {selectedItem.UNID || "N/A"}</Text>
                   </View>

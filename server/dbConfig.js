@@ -13,6 +13,21 @@ const config = {
     }
 };
 
+
+//-----------------------------------
+
+// const config = {
+//     user: 'sa', // cambiar por el usuario real
+//     password: 'Binaria676*', // cambiar por la contraseña real
+//     server: 'svr-test', // o la IP/servidor donde esté la base
+//     database: 'DB_CHL', // nombre real de la base
+//     options: {
+//         encrypt: false, // si uso Azure poner en true
+//         trustServerCertificate: true, // útil para evitar problemas de certificado
+//     }
+// };
+//-----------------------------------
+
 module.exports = {
     sql,
     config
