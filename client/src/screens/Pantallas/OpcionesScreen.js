@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import styles from '../../styles/OpcionesScreen.styles'; // Importa los estilos
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AuthContext } from "../../context/AuthContext";
+import Toast from "react-native-toast-message";
 
-export const OpcionesScreen = () => {
+export const OpcionesScreen = ({ navigation }) => {
+
+    const { updateFormData, formData = {} } = useContext(AuthContext);
+
+    const sesionCerrada = () => {
+        // Lógica para cerrar sesión
+        updateFormData({ isAuthenticated: false }); // Actualiza el estado de autenticación
+        Toast.show({
+            type: "success",
+            text1: "Sesión cerrada",
+            text2: "La sesión se ha cerrado correctamente.",
+        });
+        
+        navigation.navigate('Login'); 
+   
+    }
+
     return (
         <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -12,6 +30,7 @@ export const OpcionesScreen = () => {
         </View>
         <Text style={{ fontSize: 28}}>Opciones</Text>
         <Text style={{marginBottom: 40, fontSize: 16}}>ADMIN</Text>
+        {/* <Text>{formData.isAuthenticated == false ? "false" : "true"}</Text> */}
                   
         <View>
         
@@ -27,7 +46,7 @@ export const OpcionesScreen = () => {
 
 
         <View style={styles.containerBtn}>
-                <TouchableOpacity><Text style={styles.buttonText}>CERRAR SESION</Text></TouchableOpacity>
+                <TouchableOpacity><Text style={styles.buttonText} onPress={sesionCerrada}>CERRAR SESION</Text></TouchableOpacity>
         </View>
         <View style={styles.containerBtn}>
             <TouchableOpacity><Text style={styles.buttonText}>CERRAR CONEXION</Text></TouchableOpacity>

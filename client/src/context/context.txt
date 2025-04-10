@@ -1,0 +1,178 @@
+//FUNCIONAMIENTO DE MI CONTEXT
+
+
+// Importaciones necesarias
+import { createContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+/**
+ * Creamos el contexto con valores por defecto.
+ * Esto sirve para:
+ * 1. Autocompletado en IDEs
+ * 2. Prevenir errores si el contexto se usa sin Provider
+ * 3. Documentar la estructura del contexto
+ */
+export const AuthContext = createContext({
+  // Estado de autenticación
+  isAuthenticated: false,          // Indica si el usuario está logueado
+  setIsAuthenticated: () => {},    // Función para cambiar estado de autenticación
+  
+  // Funciones de autenticación
+  logout: () => {},                // Función para cerrar sesión
+  
+  // Datos del formulario
+  formData: {},                    // Almacena todos los datos de los formularios
+  updateFormData: () => {},        // Actualiza datos del formulario (merge)
+  resetFormData: () => {},         // Reinicia todos los datos del formulario
+  
+  // Progreso de la aplicación
+  screenProgress: {},              // Registra qué pantallas están completas
+  updateScreenProgress: () => {},  // Actualiza estado de una pantalla específica
+  overallProgress: 0,              // Porcentaje total completado (0 a 1)
+  markScreenAsComplete: () => {},  // Marca pantalla como completa directamente
+});
+
+/**
+ * Proveedor del contexto que envuelve la aplicación.
+ * Maneja el estado global y provee funciones para interactuar con él.
+ */
+export const AuthProvider = ({ children }) => {
+  // 1. ESTADO DE AUTENTICACIÓN
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  // 2. ESTADO DEL PROGRESO POR PANTALLA
+  // Cada clave representa una pantalla y su estado de completitud
+  const [screenProgress, setScreenProgress] = useState({
+    condHabitScreen: false,
+    CondLabEstablecimientoScreen: false,
+    CondLaboralTrabScreen: false,
+    CondHabitTrabScreen: false,
+    HomeScreen: false,
+    identActaScreen: false,
+    identEstablecimientoScreen: false,
+    IdentificacionTrabajadorScreen: false,
+    IdentInspectoresScreen: false,
+  });
+
+  // 3. PROGRESO GENERAL CALCULADO
+  const [overallProgress, setOverallProgress] = useState(0);
+
+  // 4. ESTADO DE LOS DATOS DEL FORMULARIO
+  // Contiene todos los campos necesarios para los formularios
+  const [formData, setFormData] = useState({
+    isDataLoaded: false,
+    numero: 0,
+    numero2: 0,
+    fechaISO: '',
+    seccional: 0,
+    tipoActa: '',
+    // ... (todos los demás campos del formulario)
+  });
+
+  /**
+   * Actualiza el estado de completitud de una pantalla específica
+   * @param {string} screenName - Nombre de la pantalla (debe coincidir con las claves en screenProgress)
+   * @param {boolean} isComplete - Si la pantalla está completada o no
+   */
+  const updateScreenProgress = (screenName, isComplete) => {
+    setScreenProgress(prev => ({
+      ...prev,                    // Mantiene los otros valores
+      [screenName]: isComplete    // Actualiza solo la pantalla especificada
+    }));
+  };
+
+  /**
+   * Marca una pantalla como completada directamente
+   * @param {string} screenName - Nombre de la pantalla a marcar como completa
+   */
+  const markScreenAsComplete = (screenName) => {
+    updateScreenProgress(screenName, true);
+  };
+
+  /**
+   * Efecto que calcula el progreso general cada vez que cambia screenProgress
+   * Calcula qué porcentaje de pantallas están completadas
+   */
+  useEffect(() => {
+    const screens = Object.values(screenProgress);      // Obtiene array de valores booleanos
+    const completedScreens = screens.filter(Boolean);   // Filtra solo los true
+    const progress = completedScreens.length / screens.length; // Calcula porcentaje
+    
+    setOverallProgress(progress);  // Actualiza el progreso general
+  }, [screenProgress]);           // Se ejecuta cuando screenProgress cambia
+
+  /**
+   * Actualiza los datos del formulario (merge)
+   * @param {object} newData - Objeto con los nuevos datos a actualizar
+   */
+  const updateFormData = (newData) => {
+    setFormData(prev => ({ 
+      ...prev,    // Mantiene los datos existentes
+      ...newData   // Sobrescribe con nuevos datos
+    }));
+  };
+
+  /**
+   * Reinicia TODOS los datos del formulario a sus valores iniciales
+   * También puede resetear el progreso si se desea
+   */
+  const resetFormData = () => {
+    // Reinicia formData
+    setFormData({
+      isDataLoaded: false,
+      numero: 0,
+      numero2: 0,
+      // ... (todos los campos a sus valores iniciales)
+    });
+
+    // Opcional: reinicia el progreso
+    setScreenProgress({
+      identActaScreen: false,
+      identInspectorScreen: false,
+      // ... (todas las pantallas a false)
+    });
+  };
+
+  /**
+   * Función para cerrar sesión:
+   * 1. Elimina el token de autenticación
+   * 2. Actualiza estado de autenticación
+   * 3. Reinicia los datos del formulario
+   */
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem("userToken");  // Elimina token persistente
+      setIsAuthenticated(false);                   // Actualiza estado
+      resetFormData();                             // Limpia formularios
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
+
+  /**
+   * Provee todos los estados y funciones a los componentes hijos
+   */
+  return (
+    <AuthContext.Provider
+      value={{
+        // Autenticación
+        isAuthenticated,
+        setIsAuthenticated,
+        logout,
+        
+        // Datos del formulario
+        formData,
+        updateFormData,
+        resetFormData,
+        
+        // Progreso
+        screenProgress,
+        updateScreenProgress,
+        overallProgress,
+        markScreenAsComplete,
+      }}
+    >
+      {children}  {/* Renderiza los componentes hijos */}
+    </AuthContext.Provider>
+  );
+};

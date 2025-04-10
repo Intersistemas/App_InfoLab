@@ -39,47 +39,102 @@ app.get('/articulos', async (req, res) => {
 });
 
 //>>>>>>>>>>>>>>>>>>>>>Ruta para buscar un artículo por su código o código de barras<<<<<<<<<<<<<<<<<<<<<<<<<
+// app.get('/buscar/:codigo', async (req, res) => {
+//     // Guardo el código que viene como parámetro en la URL
+//     const codigoIngresado = req.params.codigo;
+
+//     try {
+//         // Me conecto a la base de datos SQL Server
+//         const pool = await sql.connect(config);
+
+//         // Primero intento buscar directamente en la tabla fact0007 usando el campo "articulo"
+//         let resultado = await pool.request()
+//             .input('codigo', sql.VarChar, codigoIngresado)
+//             .query('SELECT * FROM fact0007 WHERE articulo = @codigo');
+
+//         // Si encuentro resultados en esa tabla, los devuelvo directamente al cliente
+//         if (resultado.recordset.length > 0) {
+//             return res.status(200).json(resultado.recordset);
+//         }
+
+//         // Si no encontré nada, busco en la tabla fact0007_cb usando el campo "CodeBar"
+//         let resultadoCB = await pool.request()
+//             .input('codigo', sql.VarChar, codigoIngresado)
+//             .query('SELECT * FROM fact0007_cb WHERE CodeBar = @codigo');
+
+//         // Si lo encuentro en la segunda tabla, obtengo el código relacionado
+//         if (resultadoCB.recordset.length > 0) {
+//             const codigoRelacionado = resultadoCB.recordset[0].Articulo;
+
+//             // Ahora uso ese código relacionado para volver a buscar en la tabla principal fact0007
+//             let resultadoFinal = await pool.request()
+//                 .input('codigo', sql.VarChar, codigoRelacionado)
+//                 .query('SELECT * FROM fact0007 WHERE articulo = @codigo');
+//             //Antes de devolcer el resultado final, te
+//             // Devuelvo al cliente los datos finales encontrados
+//             return res.status(200).json(resultadoFinal.recordset);
+//         }
+
+//         // Si no encontré nada en ninguna de las dos tablas, aviso que no hay coincidencias
+//         res.status(404).json({ mensaje: 'Código no encontrado en ninguna tabla' });
+
+//     } catch (error) {
+//         // Si algo falla durante la consulta, muestro el error y devuelvo un mensaje al cliente
+//         console.error('Error al buscar el código:', error);
+//         res.status(500).send('Error interno del servidor');
+//     }
+// });
+
 app.get('/buscar/:codigo', async (req, res) => {
-    // Guardo el código que viene como parámetro en la URL
     const codigoIngresado = req.params.codigo;
 
     try {
-        // Me conecto a la base de datos SQL Server
         const pool = await sql.connect(config);
 
-        // Primero intento buscar directamente en la tabla fact0007 usando el campo "articulo"
+        // 1. Buscar directamente en FACT0007
         let resultado = await pool.request()
             .input('codigo', sql.VarChar, codigoIngresado)
-            .query('SELECT * FROM fact0007 WHERE articulo = @codigo');
+            .query('SELECT * FROM FACT0007 WHERE ARTICULO = @codigo');
 
-        // Si encuentro resultados en esa tabla, los devuelvo directamente al cliente
-        if (resultado.recordset.length > 0) {
-            return res.status(200).json(resultado.recordset);
+        let codigoFinal = codigoIngresado;
+
+        // 2. Si no se encontró, buscar en FACT0007_CB por código de barras
+        if (resultado.recordset.length === 0) {
+            const resultadoCB = await pool.request()
+                .input('codigo', sql.VarChar, codigoIngresado)
+                .query('SELECT * FROM FACT0007_CB WHERE CodeBar = @codigo');
+
+            if (resultadoCB.recordset.length === 0) {
+                return res.status(404).json({ mensaje: 'Código no encontrado en ninguna tabla' });
+            }
+
+            codigoFinal = resultadoCB.recordset[0].Articulo;
+
+            resultado = await pool.request()
+                .input('codigo', sql.VarChar, codigoFinal)
+                .query('SELECT * FROM FACT0007 WHERE ARTICULO = @codigo');
         }
 
-        // Si no encontré nada, busco en la tabla fact0007_cb usando el campo "CodeBar"
-        let resultadoCB = await pool.request()
-            .input('codigo', sql.VarChar, codigoIngresado)
-            .query('SELECT * FROM fact0007_cb WHERE CodeBar = @codigo');
+        // 3. Obtener datos relacionados desde FACT0083 y FACT0082 con JOIN
+        const resultadoStock = await pool.request()
+            .input('codigo', sql.VarChar, codigoFinal)
+            .query(`
+                SELECT 
+                    FACT0083.IDALMACEN,
+                    FACT0082.DESCRIPCION AS DESCRIPCION_ALMACEN,
+                    FACT0083.STOCK_ACTUAL
+                FROM FACT0083
+                INNER JOIN FACT0082 ON FACT0082.IDALMACEN = FACT0083.IDALMACEN
+                WHERE FACT0083.ARTICULO = @codigo
+            `);
 
-        // Si lo encuentro en la segunda tabla, obtengo el código relacionado
-        if (resultadoCB.recordset.length > 0) {
-            const codigoRelacionado = resultadoCB.recordset[0].Articulo;
-
-            // Ahora uso ese código relacionado para volver a buscar en la tabla principal fact0007
-            let resultadoFinal = await pool.request()
-                .input('codigo', sql.VarChar, codigoRelacionado)
-                .query('SELECT * FROM fact0007 WHERE articulo = @codigo');
-
-            // Devuelvo al cliente los datos finales encontrados
-            return res.status(200).json(resultadoFinal.recordset);
-        }
-
-        // Si no encontré nada en ninguna de las dos tablas, aviso que no hay coincidencias
-        res.status(404).json({ mensaje: 'Código no encontrado en ninguna tabla' });
+        // 4. Enviar todo junto como respuesta
+        return res.status(200).json({
+            articulo: resultado.recordset[0],
+            stock: resultadoStock.recordset
+        });
 
     } catch (error) {
-        // Si algo falla durante la consulta, muestro el error y devuelvo un mensaje al cliente
         console.error('Error al buscar el código:', error);
         res.status(500).send('Error interno del servidor');
     }
@@ -108,6 +163,54 @@ app.get('/buscarNombre/:nombre', async (req, res) => {
         res.status(500).send('Error interno del servidor');
     }
 });
+
+// app.get('/buscarNombre/:nombre', async (req, res) => {
+//     const nombreIngresado = req.params.nombre;
+
+//     try {
+//         const pool = await sql.connect(config);
+
+//         // 1. Buscar los productos que coincidan por nombre
+//         const productos = await pool.request()
+//             .input('nombre', sql.VarChar, `%${nombreIngresado}%`) // buscador más flexible
+//             .query('SELECT * FROM FACT0007 WHERE DESCRIPCION LIKE @nombre');
+
+//         // Si no se encuentra nada
+//         if (productos.recordset.length === 0) {
+//             return res.status(404).json({ mensaje: 'No se encontraron productos con ese nombre' });
+//         }
+
+//         // 2. Por cada producto, buscar su stock asociado
+//         const productosConStock = [];
+
+//         for (const producto of productos.recordset) {
+//             const stock = await pool.request()
+//                 .input('codigo', sql.VarChar, producto.ARTICULO)
+//                 .query(`
+//                     SELECT 
+//                         FACT0083.IDALMACEN,
+//                         FACT0082.DESCRIPCION AS DESCRIPCION_ALMACEN,
+//                         FACT0083.STOCK_ACTUAL
+//                     FROM FACT0083
+//                     INNER JOIN FACT0082 ON FACT0082.IDALMACEN = FACT0083.IDALMACEN
+//                     WHERE FACT0083.ARTICULO = @codigo
+//                 `);
+
+//             productosConStock.push({
+//                 articulo: producto.recordset[0],
+//                 stock: stock.recordset
+//             });
+//         }
+
+//         // 3. Devolver los productos con su stock incluido
+//         res.status(200).json(productosConStock);
+
+//     } catch (error) {
+//         console.error('Error al buscar el nombre:', error);
+//         res.status(500).send('Error interno del servidor');
+//     }
+// });
+
 //>>>>>>>>>>>>>>>>>>>>>>Ruta para Actualizar un artículo<<<<<<<<<<<<<<<<<<<<<<<<<
 app.put('/actualizarArticulo/:codigo', async (req, res) => {
     // Obtengo el código del artículo a actualizar desde los parámetros de la solicitud
@@ -188,6 +291,10 @@ app.post('/agregarArticulo', async (req, res) => {
 // app.listen(PORT, () => {
 //     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 // });
+
+
+//si quiero realizar una ruta para que el usuario ingrese los dsatos de conexion, tanto la ip, base de datos, usuario, contraseña y puerto
+//puedo hacerlo de la siguiente manera, pero no es necesario ya que ya tengo la base de datos configurada en el archivo dbConfig.js
 
 
 //realizo esto para que el servidor escuche en todas las interfaces de red disponibles
